@@ -17,3 +17,5 @@ _ReSharper*
 *.docstates
 UpgradeLog*.htm
 /src/packages
+*.ide
+*.lock
