@@ -1,0 +1,10 @@
+packages
+_ReSharper.*
+*.suo
+*.cache
+*.user
+*.vs
+bin
+obj
+Bin
+packages
