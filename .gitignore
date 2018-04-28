@@ -19,3 +19,4 @@ UpgradeLog*.htm
 /src/packages
 *.ide
 *.lock
+src/DocMaker/packages.config

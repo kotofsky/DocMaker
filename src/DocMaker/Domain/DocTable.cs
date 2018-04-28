@@ -4,6 +4,11 @@ namespace DocMaker.Domain
 {
     public class DocTable
     {
+        public DocTable()
+        {
+            Rows = new List<DocTableRow>();
+        }
+
         public List<DocTableRow> Rows { get; set; }
 
         public void AddRow(string[] cells)
