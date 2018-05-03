@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DocMaker</id>
-    <version>1.0.0.0</version>
+    <version>$version$</version>
     <authors>Artem Rudyakov</authors>
     <owners>Artem Rudyakov</owners>
     <projectUrl>https://github.com/kotofsky/DocMaker</projectUrl>
@@ -11,6 +11,9 @@
     <copyright>Copyright 2018</copyright>
     <language>en-US</language>
     <tags>Word, OpenXml</tags>
+    <dependencies>
+        <dependency id="DocumentFormat.OpenXml" version="2.5.0" />
+    </dependencies>
   </metadata>
   <files>
         <file src="..\DocMaker\bin\Release\DocMaker.dll" target="lib\net462-full" />            
