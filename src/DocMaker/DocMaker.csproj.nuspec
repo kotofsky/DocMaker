@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DocMaker</id>
+    <version>1.0.0.0</version>
+    <authors>Artem Rudyakov</authors>
+    <owners>Artem Rudyakov</owners>
+    <projectUrl>https://github.com/kotofsky/DocMaker</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple library to create word documents with fields and tables</description>
+    <copyright>Copyright 2018</copyright>
+    <language>en-US</language>
+    <tags>Word, OpenXml</tags>
+  </metadata>
+  <files>
+        <file src="..\DocMaker\bin\Release\DocMaker.dll" target="lib\net462-full" />            
+    </files>
+</package>

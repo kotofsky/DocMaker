@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DocMaker")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simple library to create word documents with fields and tables.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Kotofsky")]
 [assembly: AssemblyProduct("DocMaker")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
