@@ -22,7 +22,7 @@ namespace DocMakerConsole
             template.Tables = new[] {table1};
             var result = maker.Build(path, template);
             var newpath = "2.docx";
-            File.WriteAllBytes(newpath,result);
+            File.WriteAllBytes(newpath,result.ToArray());
         }
     }
 }

@@ -15,7 +15,7 @@ namespace DocMaker
             return new DocTemplate();
         }
 
-        public byte[] Build(string templatePath, DocTemplate template)
+        public MemoryStream Build(string templatePath, DocTemplate template)
         {
             if (!File.Exists(templatePath))
                 throw new FileNotFoundException($"File not found at this path: {templatePath}");
@@ -23,7 +23,7 @@ namespace DocMaker
             return Generate(templatePath, template.FieldsCollection, template.Tables);
         }
 
-        private byte[] Generate(string templatePath, Dictionary<string, string> fields, DocTable[] docTables = null)
+        private MemoryStream Generate(string templatePath, Dictionary<string, string> fields, DocTable[] docTables = null)
         {
             byte[] templateData = File.ReadAllBytes(templatePath);
 
@@ -41,7 +41,7 @@ namespace DocMaker
                     if (docTables != null)
                         FillTables(doc, docTables);
                 }
-                return templateStream.ToArray();
+                return templateStream;
             }
         }
 
