@@ -6,6 +6,6 @@ namespace DocMaker.Domain
     {
         public DocTable[] Tables { get; set; }
 
-        public Dictionary<string,string> FieldsCollection { get; set; }
+        public IDictionary<string,string> FieldsCollection { get; set; }
     }
 }

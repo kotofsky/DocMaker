@@ -23,7 +23,7 @@ namespace DocMaker
             return Generate(templatePath, template.FieldsCollection, template.Tables);
         }
 
-        private byte[] Generate(string templatePath, Dictionary<string, string> fields, DocTable[] docTables = null)
+        private byte[] Generate(string templatePath, IDictionary<string, string> fields, DocTable[] docTables = null)
         {
             byte[] templateData = File.ReadAllBytes(templatePath);
 
