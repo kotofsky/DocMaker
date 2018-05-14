@@ -15,7 +15,7 @@ namespace DocMaker
             return new DocTemplate();
         }
 
-        public MemoryStream Build(string templatePath, DocTemplate template)
+        public Stream Build(string templatePath, DocTemplate template)
         {
             if (!File.Exists(templatePath))
                 throw new FileNotFoundException($"File not found at this path: {templatePath}");
@@ -23,27 +23,49 @@ namespace DocMaker
             return Generate(templatePath, template.FieldsCollection, template.Tables);
         }
 
-        private MemoryStream Generate(string templatePath, Dictionary<string, string> fields, DocTable[] docTables = null)
+        private Stream Generate(string templatePath, IDictionary<string, string> fields, DocTable[] docTables = null)
         {
             byte[] templateData = File.ReadAllBytes(templatePath);
+            
+            var templateStream = new MemoryStream();
+            templateStream.Write(templateData, 0, templateData.Length);
+            templateStream.Seek(0, SeekOrigin.Begin);
 
-            using (MemoryStream templateStream = new MemoryStream())
+            using (var doc = WordprocessingDocument.Open(templateStream, true))
             {
-                templateStream.Write(templateData, 0, templateData.Length);
-                templateStream.Seek(0, SeekOrigin.Begin);
-                using (WordprocessingDocument doc = WordprocessingDocument.Open(templateStream, true))
+                foreach (var key in fields.Keys)
                 {
-                    foreach (var key in fields.Keys)
-                    {
-                        FillContentControls(doc, key, fields[key]);
-                    }
-
-                    if (docTables != null)
-                        FillTables(doc, docTables);
+                    FillContentControls(doc, key, fields[key]);
                 }
-                return templateStream;
+
+                if (docTables != null)
+                    FillTables(doc, docTables);
             }
+
+            return templateStream;
         }
+
+        //private MemoryStream Generate(string templatePath, Dictionary<string, string> fields, DocTable[] docTables = null)
+        //{
+        //    byte[] templateData = File.ReadAllBytes(templatePath);
+
+        //    using (MemoryStream templateStream = new MemoryStream())
+        //    {
+        //        templateStream.Write(templateData, 0, templateData.Length);
+        //        templateStream.Seek(0, SeekOrigin.Begin);
+        //        using (WordprocessingDocument doc = WordprocessingDocument.Open(templateStream, true))
+        //        {
+        //            foreach (var key in fields.Keys)
+        //            {
+        //                FillContentControls(doc, key, fields[key]);
+        //            }
+
+        //            if (docTables != null)
+        //                FillTables(doc, docTables);
+        //        }
+        //        return templateStream;
+        //    }
+        //}
 
         private void FillTables(WordprocessingDocument document, DocTable[] tables)
         {

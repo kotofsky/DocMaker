@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using DocMaker;
 using DocMaker.Domain;
@@ -21,8 +22,8 @@ namespace DocMakerConsole
             table1.AddRow(cells);
             template.Tables = new[] {table1};
             var result = maker.Build(path, template);
-            var newpath = "2.docx";
-            File.WriteAllBytes(newpath,result.ToArray());
+            
+            
         }
     }
 }

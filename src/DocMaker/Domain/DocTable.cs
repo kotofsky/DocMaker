@@ -9,7 +9,7 @@ namespace DocMaker.Domain
             Rows = new List<DocTableRow>();
         }
 
-        public List<DocTableRow> Rows { get; set; }
+        public IList<DocTableRow> Rows { get; set; }
 
         public void AddRow(string[] cells)
         {
