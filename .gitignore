@@ -20,3 +20,5 @@ UpgradeLog*.htm
 *.ide
 *.lock
 *.nupkg
+packages
+*.vs
