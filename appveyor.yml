@@ -8,7 +8,7 @@
 
   configuration: Debug
 
-  image: Visual Studio 2017
+  image: Previous Visual Studio 2017
 
   build_script:
     - cmd: dotnet restore -v m  ./src/DocMaker.sln
@@ -24,7 +24,7 @@
 
   configuration: Release
 
-  image: Visual Studio 2017
+  image: Previous Visual Studio 2017
 
   build_script:
     - cmd: msbuild /t:restore ./src/DocMaker.sln
