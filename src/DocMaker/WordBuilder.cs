@@ -15,6 +15,11 @@ namespace DocMaker
             return new DocTemplate();
         }
 
+        public Stream Build(Stream stream, DocTemplate template)
+        {
+            return Generate(stream, template.FieldsCollection, template.Tables);
+        }
+
         public byte[] Build(string templatePath, DocTemplate template)
         {
             if (!File.Exists(templatePath))
@@ -23,26 +28,48 @@ namespace DocMaker
             return Generate(templatePath, template.FieldsCollection, template.Tables);
         }
 
+
+        private Stream Generate(Stream stream, IDictionary<string, string> fields, DocTable[] docTables = null)
+        {
+            var resultStream = new MemoryStream();
+            stream.CopyTo(resultStream);
+            resultStream.Seek(0, SeekOrigin.Begin);
+            
+            using (var doc = WordprocessingDocument.Open(resultStream, true))
+            {
+                foreach (var key in fields.Keys)
+                {
+                    FillContentControls(doc, key, fields[key]);
+                }
+
+                if (docTables != null)
+                    FillTables(doc, docTables);
+            }
+
+            return resultStream;
+        }
+
+
         private byte[] Generate(string templatePath, IDictionary<string, string> fields, DocTable[] docTables = null)
         {
             byte[] templateData = File.ReadAllBytes(templatePath);
-
-            using (MemoryStream templateStream = new MemoryStream())
+            
+            var templateStream = new MemoryStream();
+            templateStream.Write(templateData, 0, templateData.Length);
+            templateStream.Seek(0, SeekOrigin.Begin);
+            
+            using (var doc = WordprocessingDocument.Open(templateStream, true))
             {
-                templateStream.Write(templateData, 0, templateData.Length);
-                templateStream.Seek(0, SeekOrigin.Begin);
-                using (WordprocessingDocument doc = WordprocessingDocument.Open(templateStream, true))
+                foreach (var key in fields.Keys)
                 {
-                    foreach (var key in fields.Keys)
-                    {
-                        FillContentControls(doc, key, fields[key]);
-                    }
-
-                    if (docTables != null)
-                        FillTables(doc, docTables);
+                    FillContentControls(doc, key, fields[key]);
                 }
-                return templateStream.ToArray();
+
+                if (docTables != null)
+                    FillTables(doc, docTables);
             }
+
+            return templateStream.ToArray();
         }
 
         private void FillTables(WordprocessingDocument document, DocTable[] tables)
