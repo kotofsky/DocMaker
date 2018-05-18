@@ -15,7 +15,12 @@ namespace DocMaker
             return new DocTemplate();
         }
 
-        public Stream Build(string templatePath, DocTemplate template)
+        public Stream Build(Stream stream, DocTemplate template)
+        {
+            return Generate(stream, template.FieldsCollection, template.Tables);
+        }
+
+        public byte[] Build(string templatePath, DocTemplate template)
         {
             if (!File.Exists(templatePath))
                 throw new FileNotFoundException($"File not found at this path: {templatePath}");
@@ -23,14 +28,35 @@ namespace DocMaker
             return Generate(templatePath, template.FieldsCollection, template.Tables);
         }
 
-        private Stream Generate(string templatePath, IDictionary<string, string> fields, DocTable[] docTables = null)
+        private Stream Generate(Stream stream, IDictionary<string, string> fields, DocTable[] docTables = null)
+        {
+            var resultStream = new MemoryStream();
+            stream.CopyTo(resultStream);
+            resultStream.Seek(0, SeekOrigin.Begin);
+            
+            using (var doc = WordprocessingDocument.Open(resultStream, true))
+            {
+                foreach (var key in fields.Keys)
+                {
+                    FillContentControls(doc, key, fields[key]);
+                }
+
+                if (docTables != null)
+                    FillTables(doc, docTables);
+            }
+
+            return resultStream;
+        }
+
+
+        private byte[] Generate(string templatePath, IDictionary<string, string> fields, DocTable[] docTables = null)
         {
             byte[] templateData = File.ReadAllBytes(templatePath);
             
             var templateStream = new MemoryStream();
             templateStream.Write(templateData, 0, templateData.Length);
             templateStream.Seek(0, SeekOrigin.Begin);
-
+            
             using (var doc = WordprocessingDocument.Open(templateStream, true))
             {
                 foreach (var key in fields.Keys)
@@ -42,30 +68,8 @@ namespace DocMaker
                     FillTables(doc, docTables);
             }
 
-            return templateStream;
+            return templateStream.ToArray();
         }
-
-        //private MemoryStream Generate(string templatePath, Dictionary<string, string> fields, DocTable[] docTables = null)
-        //{
-        //    byte[] templateData = File.ReadAllBytes(templatePath);
-
-        //    using (MemoryStream templateStream = new MemoryStream())
-        //    {
-        //        templateStream.Write(templateData, 0, templateData.Length);
-        //        templateStream.Seek(0, SeekOrigin.Begin);
-        //        using (WordprocessingDocument doc = WordprocessingDocument.Open(templateStream, true))
-        //        {
-        //            foreach (var key in fields.Keys)
-        //            {
-        //                FillContentControls(doc, key, fields[key]);
-        //            }
-
-        //            if (docTables != null)
-        //                FillTables(doc, docTables);
-        //        }
-        //        return templateStream;
-        //    }
-        //}
 
         private void FillTables(WordprocessingDocument document, DocTable[] tables)
         {
