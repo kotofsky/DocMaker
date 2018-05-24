@@ -15,7 +15,7 @@
     #- cmd: msbuild /t:build /p:Configuration=Debug /v:Minimal ./src/DocMaker.sln
     - cmd: dotnet restore -v m  ./src/DocMaker.sln
     - cmd: dotnet build  -v m -c Debug ./src/DocMaker.sln
-    - cmd: dotnet pack -v m --include-symbols --no-build -o ../../artifacts --version-suffix Beta ./src/DocMakerStandard/DocMaker.csproj
+    - cmd: dotnet pack -v m --include-symbols --no-build -o ../../artifacts --version-suffix Beta /p:PackageVersion=%APPVEYOR_BUILD_VERSION% ./src/DocMakerStandard/DocMaker.csproj
    # - cmd: msbuild /t:pack /p:IncludeSymbols=true /p:Configuration=Debug /p:PackageOutputPath=../../artifacts ./src/DocMaker/DocMaker.csproj
        
   artifacts:
@@ -37,9 +37,9 @@
   artifacts:
     - path: "./artifacts/*.nupkg"
 
-  #deploy:
-   # provider: NuGet
-    #api_key:
-     # secure: BpLJxRulmt21jFGY34rtD2X2zs0299IZJUBu0r4L9u42meoXDT64TL+bxeyLj9tr
-      #skip_symbols: false
-      #artifact: /.*\.nupkg/
+  deploy:
+    provider: NuGet
+    api_key:
+      secure: BpLJxRulmt21jFGY34rtD2X2zs0299IZJUBu0r4L9u42meoXDT64TL+bxeyLj9tr
+      skip_symbols: false
+      artifact: /.*\.nupkg/

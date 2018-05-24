@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
