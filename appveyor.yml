@@ -15,7 +15,7 @@
     #- cmd: msbuild /t:build /p:Configuration=Debug /v:Minimal ./src/DocMaker.sln
     - cmd: dotnet restore -v m  ./src/DocMaker.sln
     - cmd: dotnet build  -v m -c Debug ./src/DocMaker.sln
-    - cmd: dotnet pack -v m --include-symbols --no-build -o ../../artifacts --version-suffix Beta ./src/DocMaker/DocMaker.csproj
+    - cmd: dotnet pack -v m --include-symbols --no-build -o ../../artifacts --version-suffix Beta ./src/DocMakerStandard/DocMaker.csproj
    # - cmd: msbuild /t:pack /p:IncludeSymbols=true /p:Configuration=Debug /p:PackageOutputPath=../../artifacts ./src/DocMaker/DocMaker.csproj
        
   artifacts:
