@@ -4,6 +4,7 @@
     <TargetFramework>net46</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
