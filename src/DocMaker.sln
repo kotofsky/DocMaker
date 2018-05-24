@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocMaker", "DocMaker\DocMak
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocMakerConsole", "DocMakerConsole\DocMakerConsole.csproj", "{A511C396-A923-443A-A417-68FF7C504CB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocMakerStandard", "DocMakerStandard\DocMakerStandard.csproj", "{0BD49109-AE37-41C2-B389-9BF79E3DE610}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A511C396-A923-443A-A417-68FF7C504CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A511C396-A923-443A-A417-68FF7C504CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A511C396-A923-443A-A417-68FF7C504CB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD49109-AE37-41C2-B389-9BF79E3DE610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD49109-AE37-41C2-B389-9BF79E3DE610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD49109-AE37-41C2-B389-9BF79E3DE610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD49109-AE37-41C2-B389-9BF79E3DE610}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
