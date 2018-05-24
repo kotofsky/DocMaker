@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DocMakerStandard.Domain
+namespace DocMaker.Domain
 {
     public class DocTable
     {

@@ -1,4 +1,4 @@
-﻿namespace DocMakerStandard.Domain
+﻿namespace DocMaker.Domain
 {
     public class DocTableRow
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using DocumentFormat.OpenXml.Wordprocessing;
 
-namespace DocMakerStandard.Extensions
+namespace DocMaker.Extensions
 {
     public static class TableExtensions
     {

@@ -50,8 +50,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DocMaker\DocMaker.csproj">
-      <Project>{71577b29-c513-428f-aa0e-4a42f1e24090}</Project>
+    <ProjectReference Include="..\DocMakerStandard\DocMaker.csproj">
+      <Project>{0bd49109-ae37-41c2-b389-9bf79e3de610}</Project>
       <Name>DocMaker</Name>
     </ProjectReference>
   </ItemGroup>

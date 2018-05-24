@@ -8,14 +8,14 @@
 
   configuration: Debug
 
-  image: Previous Visual Studio 2017
+  image: Visual Studio 2017
 
   build_script:
    # - cmd: msbuild /t:restore ./src/DocMaker.sln
     #- cmd: msbuild /t:build /p:Configuration=Debug /v:Minimal ./src/DocMaker.sln
     - cmd: dotnet restore -v m  ./src/DocMaker.sln
     - cmd: dotnet build  -v m -c Debug ./src/DocMaker.sln
-    - cmd: dotnet pack -v m --include-symbols --no-build -o ../../artifacts --version-suffix Beta ./src/DocMakerStandard/DocMakerStandard.csproj
+    - cmd: dotnet pack -v m --include-symbols --no-build -o ../../artifacts --version-suffix Beta ./src/DocMaker/DocMaker.csproj
    # - cmd: msbuild /t:pack /p:IncludeSymbols=true /p:Configuration=Debug /p:PackageOutputPath=../../artifacts ./src/DocMaker/DocMaker.csproj
        
   artifacts:

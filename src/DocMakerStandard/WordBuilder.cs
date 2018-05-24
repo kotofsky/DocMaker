@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using DocMakerStandard.Domain;
-using DocMakerStandard.Extensions;
+using DocMaker.Domain;
+using DocMaker.Extensions;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
-namespace DocMakerStandard
+namespace DocMaker
 {
     public class WordBuilder
     {
