@@ -5,6 +5,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
     <Version>1.0.4</Version>
+    <Authors>Artem.Rudyakov</Authors>
   </PropertyGroup>
 
   <ItemGroup>
