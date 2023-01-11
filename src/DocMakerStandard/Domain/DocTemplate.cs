@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DocMaker.Domain
+﻿namespace DocMaker.Domain
 {
     public class DocTemplate
     {

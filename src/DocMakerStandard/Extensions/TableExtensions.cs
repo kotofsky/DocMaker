@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using DocumentFormat.OpenXml.Wordprocessing;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace DocMaker.Extensions
 {

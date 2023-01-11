@@ -1,24 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
-    <RestorePackages>true</RestorePackages>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
-    <Version>1.0.3</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0</TargetFrameworks>
+		<RestorePackages>true</RestorePackages>
+		<SignAssembly>true</SignAssembly>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
+		<Version>1.0.7</Version>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.9.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DocumentFormat.OpenXml" Version="2.19.0" />
+	</ItemGroup>
 
-  <ItemGroup Condition="('$(TargetFramework)'=='net46') Or ('$(TargetFramework)'=='net461')">
-    <Reference Include="System.Core" />
-    <Reference Include="System.Linq" />
-  </ItemGroup>
-  
-   <ItemGroup Condition="('$(TargetFramework)'=='netstandard1.6') Or ('$(TargetFramework)'=='netstandard2.0')">
-    <Reference Include="System.Linq" />
-  </ItemGroup>
+	<ItemGroup Condition="('$(TargetFramework)'=='net46') Or ('$(TargetFramework)'=='net461')">
+		<Reference Include="System.Core" />
+		<Reference Include="System.Linq" />
+	</ItemGroup>
+
+	<ItemGroup Condition="('$(TargetFramework)'=='netstandard1.6') Or ('$(TargetFramework)'=='netstandard2.0')">
+		<Reference Include="System.Linq" />
+	</ItemGroup>
 
 </Project>
