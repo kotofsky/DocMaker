@@ -9,6 +9,7 @@
 		<AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
 		<Version>1.0.7</Version>
 		<OutputType>Library</OutputType>
+		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
