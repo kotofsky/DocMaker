@@ -10,34 +10,16 @@ on:
     
 jobs:
   build:
-
-    env:
-      BUILD_CONFIG: 'Release'
-      SOLUTION: 'DocMaker.sln'
-
     runs-on: ubuntu-latest
-
+    timeout-minutes: 15
     steps:
-    - uses: actions/checkout@v2
-    
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
-
-
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
-
-    - name: Restore dependencies
-      run: nuget restore $SOLUTION
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.0
-
-    - name: Build
-      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG -p:Version=$BUILD_VERSION --no-restore
-
-    - name: Publish
-      if: startsWith(github.ref, 'refs/heads/release')
-      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      run: echo "VERSION=1.0.7" >> $GITHUB_ENV
+    - name: Pack
+      run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
+    - name: Push
+      run: dotnet nuget push NuGet.Workflow.${VERSION}.nupkg --source https://nuget.pkg.github.com/acraven/index.json --api-key ${NUGET_API_KEY}
+      env:
+        GITHUB_TOKEN: ${{ secrets.NUGET_API_KEY }}
