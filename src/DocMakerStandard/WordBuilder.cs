@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using DocMaker.Domain;
+﻿using DocMaker.Domain;
 using DocMaker.Extensions;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -85,7 +82,7 @@ namespace DocMaker
 
                 TableRow firstRow = table.Elements<TableRow>().ElementAt(0);
 
-                // проход по всем строкам xml таблицы
+                // iterate each row
                 foreach (var tr in clientTable.Rows)
                 {
                     TableRow newRow = firstRow.CloneRow();
@@ -100,7 +97,6 @@ namespace DocMaker
                             TableCell toDelCell = newRow.Elements<TableCell>().ToList()[1];
                             toDelCell.Remove();
                             GridSpan gs = new GridSpan();
-                            // TODO: think about skip parameter
                             int countToSkip = cells.Count(x => x == "-") + 1;
                             gs.Val = countToSkip;
                             firstNewCell.TableCellProperties.Append(gs);
@@ -137,12 +133,11 @@ namespace DocMaker
         }
 
         /// <summary>
-        /// Данный метод возвращает Объект текста контент-контрола
+        /// Method for update content-control element
         /// </summary>
-        /// <param name = "document" > Документ Word</param>
-        /// <param name = "name" > Название поля</param>
-        /// <param name = "value" > Значение поля</param>
-        /// <returns>Text объект поля</returns>
+        /// <param name = "document" >Word document</param>
+        /// <param name = "name" >Name of the field</param>
+        /// <param name = "value" >Value of the field</param>
         private void FillContentControls(WordprocessingDocument document, string name, string value)
         {
             List<SdtElement> blocks = new List<SdtElement>();
