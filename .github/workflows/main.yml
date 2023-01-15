@@ -26,6 +26,6 @@ jobs:
     - name: Pack
       run: dotnet pack ./src/DocMaker.sln --configuration Release /p:Version=${VERSION} --no-build --output .
     - name: Push
-      run: dotnet nuget push DocMaker.${VERSION}.nupkg --source https://nuget.pkg.github.com/docmaker/index.json --api-key ${GITHUB_TOKEN}
+      run: dotnet nuget push DocMaker.${VERSION}.nupkg -k ${GITHUB_TOKEN} -s https://api.nuget.org/v3/index.json
       env:
         GITHUB_TOKEN: ${{ secrets.NUGET_API_KEY }}
