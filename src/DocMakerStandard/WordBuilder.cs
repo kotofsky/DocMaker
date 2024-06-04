@@ -12,6 +12,12 @@ namespace DocMaker
             return new DocTemplate();
         }
 
+        /// <summary>
+        /// Build from the stream
+        /// </summary>
+        /// <param name="stream">Input stream</param>
+        /// <param name="template">Template object</param>
+        /// <returns>Result stream</returns>
         public Stream Build(Stream stream, DocTemplate template)
         {
             return Generate(stream, template.FieldsCollection, template.Tables);

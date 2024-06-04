@@ -1,5 +1,5 @@
 # DocMaker
-Simple library to create word documents with fields and tables.
+Simple library to generate word documents with fields and tables.
 
 # Status
 [![Build status](https://ci.appveyor.com/api/projects/status/r3cvo1edsnloweki?svg=true)](https://ci.appveyor.com/project/kotofsky/docmaker)
