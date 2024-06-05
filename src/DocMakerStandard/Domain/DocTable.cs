@@ -1,20 +1,17 @@
-﻿using System.Collections.Generic;
+﻿namespace DocMaker.Domain;
 
-namespace DocMaker.Domain
+public class DocTable
 {
-    public class DocTable
+    public DocTable()
     {
-        public DocTable()
-        {
-            Rows = new List<DocTableRow>();
-        }
+        Rows = new List<DocTableRow>();
+    }
 
-        public IList<DocTableRow> Rows { get; set; }
+    public IList<DocTableRow> Rows { get; set; }
 
-        public void AddRow(string[] cells)
-        {
-            var row = new DocTableRow { Cells = cells };
-            Rows.Add(row);
-        }
+    public void AddRow(string[] cells)
+    {
+        var row = new DocTableRow { Cells = cells };
+        Rows.Add(row);
     }
 }
