@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+<package >
   <metadata>
     <id>DocMaker</id>
     <version>1.0.8</version>
     <authors>Artem Rudiakov</authors>
     <owners>Artem Rudiakov</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/kotofsky/DocMaker</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Simple library to generate word documents with fields and tables.</description>
     <releaseNotes>Adding support for .net 8</releaseNotes>
+    <copyright>Copyright 2024</copyright>
     <tags>v1.0.8</tags>
-    <repository type="git" url="https://github.com/kotofsky/DocMaker" />
   </metadata>
 </package>
