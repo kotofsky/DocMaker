@@ -1,9 +1,8 @@
-﻿namespace DocMaker.Domain
-{
-    public class DocTemplate
-    {
-        public DocTable[] Tables { get; set; }
+﻿namespace DocMaker.Domain;
 
-        public IDictionary<string,string> FieldsCollection { get; set; }
-    }
+public class DocTemplate
+{
+    public DocTable[] Tables { get; set; }
+
+    public IDictionary<string, string> FieldsCollection { get; set; }
 }
