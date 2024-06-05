@@ -20,11 +20,11 @@ jobs:
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
         git branch --remote --contains | grep origin/release
     - name: Set VERSION variable from tag
-      run: echo "VERSION=1.0.7" >> $GITHUB_ENV
+      run: echo "VERSION=1.0.8" >> $GITHUB_ENV
     - name: Build
       run: dotnet build ./src/DocMaker.sln --configuration Release /p:Version=${VERSION}
     - name: Pack
-      run: dotnet pack ./src/DocMaker.sln --configuration Release /p:Version=${VERSION} --no-build --output .
+      run: dotnet pack ./src/DocMaker.sln  -IncludeReferencedProjects -properties CustomAuthor="Artem Rudiakov"  --configuration Release /p:Version=${VERSION} --no-build --output .
     - name: Push
       run: dotnet nuget push DocMaker.${VERSION}.nupkg -k ${GITHUB_TOKEN} -s https://api.nuget.org/v3/index.json
       env:
