@@ -1,7 +1,6 @@
-﻿namespace DocMaker.Domain
+﻿namespace DocMaker.Domain;
+
+public class DocTableRow
 {
-    public class DocTableRow
-    {
-        public string[] Cells { get; set; }
-    }
+    public string[] Cells { get; set; }
 }
