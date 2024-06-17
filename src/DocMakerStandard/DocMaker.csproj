@@ -6,12 +6,13 @@
 		<Authors>Artem Rudiakov</Authors>
 		<Product>DocMaker</Product>
 		<Description>Simple library to generate word documents with fields and tables.</Description>
-
+		<AssemblyVersion>1.0.9</AssemblyVersion>
+ 		<FileVersion>1.0.9</FileVersion>
+    		<VersionPrefix>1.0.9</VersionPrefix>
 		<SignAssembly>true</SignAssembly>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
-		<Version>1.0.9</Version>
 		<OutputType>Library</OutputType>
 		<LangVersion>preview</LangVersion>
 		<Title>DocMaker</Title>
