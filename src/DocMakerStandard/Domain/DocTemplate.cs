@@ -4,5 +4,5 @@ public class DocTemplate
 {
     public DocTable[] Tables { get; set; }
 
-    public IDictionary<string, string> FieldsCollection { get; set; }
+    public IDictionary<string, string> FieldsCollection { get; set; } = new Dictionary<string, string>();
 }
