@@ -192,7 +192,6 @@ public class WordBuilder : IWordBuilder
                 }
 
                 SetContentControlValue(run, value);
-
             }
         }
     }
