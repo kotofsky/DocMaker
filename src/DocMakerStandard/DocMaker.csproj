@@ -6,9 +6,9 @@
 		<Authors>Artem Rudiakov</Authors>
 		<Product>DocMaker</Product>
 		<Description>Simple library to generate word documents with fields and tables.</Description>
-		<AssemblyVersion>1.0.9</AssemblyVersion>
- 		<FileVersion>1.0.9</FileVersion>
-    		<VersionPrefix>1.0.9</VersionPrefix>
+		<AssemblyVersion>2.0.0</AssemblyVersion>
+ 		<FileVersion>2.0.0</FileVersion>
+    	<VersionPrefix>2.0.0</VersionPrefix>
 		<SignAssembly>true</SignAssembly>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
