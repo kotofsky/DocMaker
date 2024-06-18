@@ -39,7 +39,7 @@ internal class WordElementsService
                         TableCell firstNewCell = newRow.Elements<TableCell>().First();
                         TableCell toDelCell = newRow.Elements<TableCell>().ToList()[1];
                         toDelCell.Remove();
-                        GridSpan gs = new GridSpan();
+                        GridSpan gs = new();
                         int countToSkip = cells.Count(x => x == "-") + 1;
                         gs.Val = countToSkip;
                         firstNewCell.TableCellProperties.Append(gs);
@@ -83,11 +83,11 @@ internal class WordElementsService
     /// <param name = "value" >Value of the field</param>
     internal void SetContentControls(WordprocessingDocument document, string name, string value)
     {
-        List<SdtElement> blocks = [.. document.MainDocumentPart.Document.Body.Descendants<SdtElement>()];
+        List<SdtElement> blocks = [.. document?.MainDocumentPart?.Document?.Body?.Descendants<SdtElement>()];
 
         IEnumerable<SdtElement> matchBlocks = blocks.Where(x =>
         {
-            var alias = x.SdtProperties.OfType<SdtAlias>().FirstOrDefault(s => s.Val == name);
+            SdtAlias? alias = x.SdtProperties?.OfType<SdtAlias>().FirstOrDefault(s => s.Val == name);
             return alias?.Val?.Value == name;
         });
 
@@ -95,9 +95,9 @@ internal class WordElementsService
         {
             if (block is SdtRun)
             {
-                SdtContentRun contRun = block.Descendants<SdtContentRun>().First();
+                SdtContentRun contRun = block.Descendants<SdtContentRun>().FirstOrDefault() ?? new SdtContentRun();
 
-                Run run = contRun.Descendants().OfType<Run>().FirstOrDefault();
+                var run = contRun?.Descendants()?.OfType<Run>()?.FirstOrDefault();
                 if (run == null)
                 {
                     run = new Run();
@@ -107,11 +107,10 @@ internal class WordElementsService
                         run.PrependChild(new RunProperties());
                     }
 
-                    RunProperties runProp = run.RunProperties;
-                    if (runProp.RunStyle == null)
-                        runProp.RunStyle = new RunStyle();
+                    RunProperties runProp = run?.RunProperties ?? new RunProperties();
+                    runProp.RunStyle ??= new RunStyle();
 
-                    runProp.RunStyle.Val = (block.SdtProperties.FirstChild.FirstChild as RunStyle)?.Val;
+                    runProp.RunStyle.Val = (block?.SdtProperties?.FirstChild?.FirstChild as RunStyle)?.Val;
                     SetContentControlValue(run, value);
                     contRun.Append(run);
                 }
@@ -119,12 +118,11 @@ internal class WordElementsService
                 {
                     SetContentControlValue(run, value);
                 }
-
             }
             else
             {
-                Paragraph contentFieldParagraph = block.Descendants().OfType<Paragraph>().FirstOrDefault();
-                Run run = contentFieldParagraph.OfType<Run>().FirstOrDefault() ?? new Run();
+                Paragraph contentFieldParagraph = block.Descendants().OfType<Paragraph>().FirstOrDefault() ?? new Paragraph();
+                Run run = contentFieldParagraph?.OfType<Run>().FirstOrDefault() ?? new Run();
                 if (run == null)
                 {
                     SetContentControlValue(run, value);
@@ -136,7 +134,7 @@ internal class WordElementsService
         }
     }
 
-    internal void SetContentControlValue(Run run, string value)
+    internal void SetContentControlValue(Run? run, string value)
     {
         if (string.IsNullOrEmpty(value))
             return;

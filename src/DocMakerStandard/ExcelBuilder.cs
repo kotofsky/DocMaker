@@ -34,16 +34,15 @@ public sealed class ExcelBuilder : IExcelBuilder
         var fullResultPath = Path.GetFullPath(resultPath + outputFileName);
 
         var buffer = new byte[1024 * 1024];
-        var bytesRead = 0;
 
-        using (FileStream sr = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-        using (BufferedStream srb = new BufferedStream(sr))
-        using (FileStream sw = new FileStream(fullResultPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-        using (BufferedStream swb = new BufferedStream(sw))
+        using (FileStream sr = new(sourcePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        using (BufferedStream srb = new(sr))
+        using (FileStream sw = new(fullResultPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+        using (BufferedStream swb = new(sw))
         {
             while (true)
             {
-                bytesRead = srb.Read(buffer, 0, buffer.Length);
+                var bytesRead = srb.Read(buffer, 0, buffer.Length);
                 if (bytesRead == 0) break;
                 swb.Write(buffer, 0, bytesRead);
             }
@@ -81,7 +80,7 @@ public sealed class ExcelBuilder : IExcelBuilder
         // write data rows
         foreach (var row in excelDataRows.Rows.OrderBy(r => r.RowIndex))
         {
-            Row r = new Row
+            Row r = new()
             {
                 RowIndex = (uint)row.RowIndex
             };
@@ -90,7 +89,7 @@ public sealed class ExcelBuilder : IExcelBuilder
 
             foreach (var rowCell in row.Cells)
             {
-                Cell c = new Cell
+                Cell c = new()
                 {
                     DataType = CellValues.String,
                     CellReference = rowCell.Key
@@ -99,7 +98,7 @@ public sealed class ExcelBuilder : IExcelBuilder
                 //cell start
                 openXmlWriter.WriteStartElement(c);
 
-                CellValue v = new CellValue(rowCell.Value);
+                CellValue v = new(rowCell.Value);
                 //cell value
                 openXmlWriter.WriteElement(v);
 
@@ -131,19 +130,16 @@ public sealed class ExcelBuilder : IExcelBuilder
         using (SpreadsheetDocument document = SpreadsheetDocument.Open(filePath, true))
         {
             var wbPart = document.WorkbookPart;
-            var theSheet = wbPart?.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name.Value.Trim() == sheetName);
-            if (theSheet == null)
-            {
-                throw new ArgumentException($"Sheetname {sheetName} not found");
-            }
-
+            var theSheet = (wbPart?.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name.Value.Trim() == sheetName)) 
+                ?? throw new ArgumentException($"Sheetname {sheetName} not found");
+            
             WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(theSheet.Id);
             Worksheet worksheet = wsPart.Worksheet;
-            SheetData sheetData = worksheet.GetFirstChild<SheetData>();
+            var sheetData = worksheet.GetFirstChild<SheetData>();
 
             var stringTable = wbPart.GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
 
-            var rows = sheetData.Elements<Row>().ToArray();
+            var rows = sheetData?.Elements<Row>().ToArray();
 
             for (int i = 0; i < rows.Length; i++)
             {

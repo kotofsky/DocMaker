@@ -33,7 +33,7 @@ public class WordBuilder : IWordBuilder
         return Generate(templatePath, template);
     }
 
-    private Stream Generate(Stream stream, DocTemplate template)
+    private MemoryStream Generate(Stream stream, DocTemplate template)
     {
         var resultStream = new MemoryStream();
         stream.CopyTo(resultStream);

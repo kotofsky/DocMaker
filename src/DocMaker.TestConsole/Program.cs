@@ -11,7 +11,7 @@ for (int i = 0; i < countRowsElements.Length; i++)
     stopWatch.Start();
     await excelTests.TestExcelDataAsync(countRowsElements[i]);
     stopWatch.Stop();
-    Console.WriteLine($"Processed {countRowsElements[i]} rows for {stopWatch.Elapsed.ToString()}");
+    Console.WriteLine($"Processed {countRowsElements[i]} rows for {stopWatch.Elapsed}");
     stopWatch.Reset();
 }
 
@@ -22,4 +22,4 @@ var wordTests = new  WordTests();
 stopWatch.Start();
 await wordTests.TestWordDataAsync();
 stopWatch.Stop();
-Console.WriteLine($"Processed word file generation with {stopWatch.Elapsed.ToString()}");
+Console.WriteLine($"Processed word file generation with {stopWatch.Elapsed}");
