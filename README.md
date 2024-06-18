@@ -16,7 +16,7 @@ var template = wordBuilder.CreateTemplate();
 template.FieldsCollection.Add("test_data", "OMG! THIS IS THE TEST DATA");
 
 //here stream is the Stream of your template
-var result = await wordBuilder.BuildAsync(stream, template); //method will return the stream of completed new file
+var result = await wordBuilder.BuildAsync(stream, template);
 ```
 ### Adding tables to Word document
 ```
@@ -36,7 +36,7 @@ template.Tables = docTables.ToArray();
 //here stream is the Stream of your template
 //BuildAsync method will find any tables in your Word template(it should contains headers or something)
 //and will add new rows and cells
-var result = await wordBuilder.BuildAsync(stream, template); //method will return the stream of completed new file
+var result = await wordBuilder.BuildAsync(stream, template);
 ```
 
 ### Generate Excel files
