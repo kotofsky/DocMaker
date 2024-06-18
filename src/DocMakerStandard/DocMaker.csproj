@@ -3,17 +3,40 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0</TargetFrameworks>
 		<RestorePackages>true</RestorePackages>
+		<Authors>Artem Rudiakov</Authors>
+		<Product>DocMaker</Product>
+		<Description>Simple library to generate word documents with fields and tables.</Description>
+		<AssemblyVersion>1.0.9</AssemblyVersion>
+ 		<FileVersion>1.0.9</FileVersion>
+    		<VersionPrefix>1.0.9</VersionPrefix>
 		<SignAssembly>true</SignAssembly>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AssemblyOriginatorKeyFile>sign.snk</AssemblyOriginatorKeyFile>
-		<Version>1.0.8</Version>
 		<OutputType>Library</OutputType>
 		<LangVersion>preview</LangVersion>
+		<Title>DocMaker</Title>
+		<Copyright>Copyright (c) 2018 Artem Rudyakov</Copyright>
+		<PackageProjectUrl>https://github.com/kotofsky/DocMaker</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>-added async support
+-project info updated</PackageReleaseNotes>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DocumentFormat.OpenXml" Version="3.0.2" />
+	  <None Include="..\..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DocumentFormat.OpenXml" Version="2.19.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="('$(TargetFramework)'=='net46') Or ('$(TargetFramework)'=='net461')">
