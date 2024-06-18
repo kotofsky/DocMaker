@@ -29,7 +29,8 @@ var docTables = new List<DocTable>();
 var firstTable = new DocTable();
 
 //you can pass symbol '-' to merge cells in your table
-firstTable.AddRow(["FirstTableData1", "FirstTableData2", "FirstTableData3", "FirstTableData4", "FirstTableData5"]);
+firstTable.AddRow(["FirstTableData1", "FirstTableData2", "FirstTableData3", 
+                                        "FirstTableData4", "FirstTableData5"]);
 docTables.Add(firstTable);
 template.Tables = docTables.ToArray();
 
