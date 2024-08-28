@@ -56,14 +56,14 @@ public sealed class ExcelBuilder : IExcelBuilder
     public async Task SetContentToFileAsync(string filePath, string sheetName, ExcelDataRows contentData)
     {
         var worksheetPartId = await AddContentDataAsync(filePath, sheetName, contentData);
-        await AddSheetToDocumentAsync(filePath, sheetName, worksheetPartId);
+        AddSheetToDocument(filePath, sheetName, worksheetPartId);
     }
 
     private async Task<string> AddContentDataAsync(string filePath, string sheetName, ExcelDataRows excelDataRows)
     {
         ExtractHeaders(filePath, sheetName, excelDataRows);
 
-        await using var fileStream = File.Create(filePath);
+        using var fileStream = File.Create(filePath);
         using var package = Package.Open(fileStream, FileMode.Create, FileAccess.Write);
         using var excel = SpreadsheetDocument.Create(package, SpreadsheetDocumentType.Workbook);
 
@@ -130,9 +130,9 @@ public sealed class ExcelBuilder : IExcelBuilder
         using (SpreadsheetDocument document = SpreadsheetDocument.Open(filePath, true))
         {
             var wbPart = document.WorkbookPart;
-            var theSheet = (wbPart?.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name.Value.Trim() == sheetName)) 
+            var theSheet = (wbPart?.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name.Value.Trim() == sheetName))
                 ?? throw new ArgumentException($"Sheetname {sheetName} not found");
-            
+
             WorksheetPart wsPart = (WorksheetPart)wbPart.GetPartById(theSheet.Id);
             Worksheet worksheet = wsPart.Worksheet;
             var sheetData = worksheet.GetFirstChild<SheetData>();
@@ -174,7 +174,7 @@ public sealed class ExcelBuilder : IExcelBuilder
                     cellValue = cellValue.Trim().Replace(" ", "");
                     if (!string.IsNullOrWhiteSpace(cellValue))
                     {
-                        int rowIndex = int.Parse(cell?.CellReference.Value[1..]);
+                        int rowIndex = int.Parse(cell?.CellReference.Value[Range.StartAt(1)]);
 
                         var row = excelDataRows.Rows.FirstOrDefault(r => r.RowIndex == rowIndex);
 
@@ -192,7 +192,7 @@ public sealed class ExcelBuilder : IExcelBuilder
                         else
                         {
                             row.Cells.Add(cell.CellReference.Value, cellValue);
-                            row.Cells = row.Cells.OrderBy(c => c.Key).ToDictionary();
+                            row.Cells = row.Cells.OrderBy(c => c.Key).ToDictionary(k => k.Key, v => v.Value);
                         }
                     }
                 }
@@ -205,9 +205,9 @@ public sealed class ExcelBuilder : IExcelBuilder
     /// </summary>
     /// <param name="filePath"></param>
     /// <param name="worksheetPartId"></param>
-    private async Task AddSheetToDocumentAsync(string filePath, string sheetName, string worksheetPartId)
+    private void AddSheetToDocument(string filePath, string sheetName, string worksheetPartId)
     {
-        await using var fileStream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+        using var fileStream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
         using var package = Package.Open(fileStream, FileMode.Open, FileAccess.ReadWrite);
         using var excel = SpreadsheetDocument.Open(package);
 
