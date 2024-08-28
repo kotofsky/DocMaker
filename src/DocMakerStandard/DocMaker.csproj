@@ -5,7 +5,7 @@
 		<RestorePackages>true</RestorePackages>
 		<Authors>Artem Rudiakov</Authors>
 		<Product>DocMaker</Product>
-		<Description>Simple library to generate word documents with fields and tables.</Description>
+		<Description>Simple library to generate word and excel documents with fields and tables. Can work with large datasets for excel up to 1M rows.</Description>
 		<AssemblyVersion>2.0.1</AssemblyVersion>
  		<FileVersion>2.0.1</FileVersion>
     	<VersionPrefix>2.0.1</VersionPrefix>
@@ -16,7 +16,7 @@
 		<OutputType>Library</OutputType>
 		<LangVersion>preview</LangVersion>
 		<Title>DocMaker</Title>
-		<Copyright>Copyright (c) 2018 Artem Rudyakov</Copyright>
+		<Copyright>Copyright (c) 2018 Artem Rudiakov</Copyright>
 		<PackageProjectUrl>https://github.com/kotofsky/DocMaker</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
